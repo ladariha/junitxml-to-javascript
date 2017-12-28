@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="my.package.class.Something" errors="1" test="4" failures="0" skipped="2"
+               timestamp="20171206T181412+0100" time="242.988">
+        <properties>
+
+
+        </properties>
+        <testcase classname="my.package.class.Something" name="test01SimpleNavigation" time="169.689">
+            <system-out>
+            </system-out>
+        </testcase>
+        <testcase classname="my.package.class.Something" name="test02StartWith" time="72.290">
+            <error message="Timed out after 60 seconds waiting">org.openqa.selenium.TimeoutException: Timed out after 60
+                seconds waiting for Waiting
+            </error>
+            <system-out>
+            </system-out>
+        </testcase>
+        <testcase classname="my.package.class.Something" name="test03StartWithPagination" time="0.000">
+            <skipped/>
+        </testcase>
+        <testcase classname="my.package.class.Something" name="test04StartWithPaginationShort" time="0.000">
+            <skipped/>
+        </testcase>
+    </testsuite>
+</testsuites>

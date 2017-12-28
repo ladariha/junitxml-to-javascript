@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="1my.package.class.Something" errors="0" test="5" failures="0" skipped="0"
+           timestamp="20171206T181624+0100" time="116.716">
+    <properties></properties>
+    <testcase classname="1my.package.class.Something" name="test00Monitoring" time="0.150">
+        <system-out>
+        </system-out>
+    </testcase>
+    <testcase classname="1my.package.class.Something" name="test01CreateJob" time="43.254">
+        <system-out>
+        </system-out>
+    </testcase>
+</testsuite>

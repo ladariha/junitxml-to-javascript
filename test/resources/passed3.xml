@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="1345my.package.class.Something" errors="0" test="1" failures="0" skipped="0"
+               timestamp="20171206T181624+0100" time="116.716">
+        <properties>
+            <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+        </properties>
+        <testcase classname="1my.package.class.Something" name="test00Monitoring" time="0.150">
+            <system-out>
+            </system-out>
+        </testcase>
+    </testsuite>
+
+    <testsuite name="123my.package.class.Something" errors="0" test="0" failures="0" skipped="0"
+               timestamp="20171206T181624+0100" time="1">
+    </testsuite>
+</testsuites>

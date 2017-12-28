@@ -1,0 +1,32 @@
+{
+  "name": "junitxml-to-javascript",
+  "version": "1.0.0",
+  "description": "Pluggable jUnit XML reports parser to JavaScript objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --recursive",
+    "test-watch": "node_modules/.bin/mocha --recursive -w"
+  },
+  "keywords": [
+    "junit",
+    "xml",
+    "report",
+    "parser"
+  ],
+  "bugs": {
+    "url": "https://github.com/ladariha/junitxml-to-javascript/issues"
+  },
+  "engines": {
+    "node": ">=8.2.1"
+  },
+  "repository": "https://github.com/ladariha/junitxml-to-javascript",
+  "author": "ladariha",
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "xml2json": "0.11.0"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "mocha": "4.0.1"
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 54.0.2840 (Linux 0.0.0)" package="" timestamp="2017-12-07T17:00:56" id="0"
+           tests="12" errors="0" failures="0" time="30.005">
+    <properties>
+        <property name="browser.fullName"
+                  value="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36"/>
+    </properties>
+    <testcase name="can - not specified" time="0.017" classname="Access"/>
+    <testcase name="can - no role specified" time="0.017" classname="Access">
+        <failure type="Expected ">Expected true to equal false.</failure>
+    </testcase>
+    <testcase name="importFile 2" time="0.015" classname="BBBB"/>
+    <testcase name="basic" time="0.205" classname="grid"/>
+    <testcase name="default usecase" time="1.338" classname="list"/>
+    <testcase name="default usecase" time="2.233" classname="list2"/>
+    <testcase name="get" time="0.018" classname="ctrl"/>
+    <testcase name="getIgnoreNotFound - new" time="0.018" classname="ctrl"/>
+    <testcase name="getIgnoreNotFound - existing" time="0.015" classname="ctrl"/>
+    <testcase name="default usecase" time="0.218" classname="table"/>
+    <testcase name="autorefresh" time="0" classname="table">
+        <skipped/>
+    </testcase>
+    <testcase name="default usecase" time="0.216" classname="args"/>
+    <testcase name="autorefresh" time="0" classname="args2">
+        <skipped/>
+    </testcase>
+    <system-out>
+    </system-out>
+    <system-err/>
+</testsuite>
