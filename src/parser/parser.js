@@ -1,5 +1,5 @@
 "use strict";
-const parser = require("xml2json");
+const parser = require("xml2js-parser").parseStringSync;
 const fs = require("fs");
 const Report = require("../model/Report");
 
@@ -21,8 +21,57 @@ Parser.prototype._createReportObject = function (reportJsonObj) {
     return Report.create(reportJsonObj, this.customTag);
 };
 
+// Make xml2js-parser output like xml2json
+// e.g. recursively merge '$'-elements, flatten arrays of size 0 or 1, etc.
+function undollar(node) {
+    const ret = {};
+    if (Array.isArray(node)) {
+        if (node.length === 1 && Object.keys(node[0]).length === 0) {
+            return node[0];
+        } else if (node.length > 1) {
+            return node.map(element => undollar(element));
+        } else {
+            const keys = Object.keys(node[0]);
+            if (keys.some(key => key !== '' + parseInt(key)))
+                return undollar(node[0]);
+            else
+                return keys
+                    .sort((a, b) => parseInt(b) - parseInt(a))
+                    .reduce((prev, cur) => prev + cur)
+                    .trim();
+        }
+    }
+
+    Object.keys(node).forEach(key => {
+        const val = node[key];
+        if (val && typeof val === 'object' && !Array.isArray(val)) {
+            if (key === '$') {
+                Object.assign(ret, undollar(val));
+            } else {
+                ret[key] = undollar(val);
+            }
+        } else if (Array.isArray(val)) {
+            if (key === 'error' && val.length > 0 && typeof val[0] === 'object' && val[0]['$']) {
+                ret[key] = {
+                    message: val[0]['$']['message'],
+                    '$t': val[0]['_'].trim(),
+                };
+            } else if (key === 'system-out' && val.length > 0) {
+                ret[key] = val[0].trim();
+            } else if (['properties', 'skipped'].includes(key) && val.length === 1) {
+                ret[key] = typeof val[0] === 'string' ? val[0].trim() : undollar(val[0]);
+            } else {
+                ret[key] = undollar(val);
+            }
+        } else {
+            ret[key] = val;
+        }
+    });
+    return ret;
+}
+
 Parser.prototype.parseXMLString = function (xmlString) {
-    return Promise.resolve(this._createReportObject(JSON.parse(parser.toJson(xmlString))));
+    return Promise.resolve(this._createReportObject(undollar(parser(xmlString))));
 };
 
 Parser.prototype.parseXMLFile = function (pathToXMLFile, encoding = "utf8") {
@@ -31,7 +80,7 @@ Parser.prototype.parseXMLFile = function (pathToXMLFile, encoding = "utf8") {
             if (err) {
                 reject(err);
             } else {
-                resolve(this._createReportObject(JSON.parse(parser.toJson(data))));
+                resolve(this._createReportObject(undollar(parser(data))));
             }
         });
     });
