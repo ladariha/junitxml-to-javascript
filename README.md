@@ -68,10 +68,11 @@ Pluggable jUnit XML reports parser to JavaScript objects
      const Parser = require("junitxml-to-javascript");
      const p = new Parser()
 #### New parser instance with custom modifier
-You can add your own modifier function that will be called right after the XML data are transformed 
-to raw JavaScript object using library `xml2json`. This function:
+You can add your own modifier function that will be called right after the XML
+data are transformed to raw JavaScript object using library `xml2js-parser`
+(transformed to match the output of the `xml2json` parser). This function:
 
- - will be given 1 parameter, the output of xml2json parser
+ - will be given 1 parameter, the output of `xml2js-parser` parser
  - must be synchronous and must return object that will be further processed
 
 
