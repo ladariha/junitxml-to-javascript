@@ -5,10 +5,10 @@ const Parser = require("../src/parser/parser");
 const fs = require("fs");
 const path = require("path");
 
-describe("xml report parser", function () {
-    it("parseXMLString() - failed.xml", function (done) {
+describe("xml report parser", () => {
+    it("parseXMLString() - failed.xml", done => {
 
-        let s = fs.readFileSync(path.join(__dirname, "resources", "failed.xml"));
+        const s = fs.readFileSync(path.join(__dirname, "resources", "failed.xml"));
 
         new Parser().parseXMLString(s)
             .then(r => {
@@ -40,7 +40,7 @@ describe("xml report parser", function () {
                 expect(r.testsuites[0].errors).equal(1);
                 expect(r.testsuites[0].skipped).equal(2);
                 expect(r.testsuites[0].tag).equal("GENERAL");
-                expect(r.testsuites[0].durationSec).equal(241.98);
+                expect(r.testsuites[0].durationSec).equal(241.979);
                 done();
             })
             .catch(e => {
@@ -48,9 +48,9 @@ describe("xml report parser", function () {
             });
     });
 
-    it("parseXMLString() - failed2.xml", function (done) {
+    it("parseXMLString() - failed2.xml", done => {
 
-        let s = fs.readFileSync(path.join(__dirname, "resources", "failed2.xml"));
+        const s = fs.readFileSync(path.join(__dirname, "resources", "failed2.xml"));
 
         new Parser().parseXMLString(s)
             .then(r => {
@@ -70,7 +70,7 @@ describe("xml report parser", function () {
                 expect(r.testsuites[0].errors).equal(1);
                 expect(r.testsuites[0].skipped).equal(2);
                 expect(r.testsuites[0].tag).equal("GENERAL");
-                expect(r.testsuites[0].durationSec).equal(241.98);
+                expect(r.testsuites[0].durationSec).equal(241.979);
                 done();
             })
             .catch(e => {
@@ -78,9 +78,9 @@ describe("xml report parser", function () {
             });
     });
 
-    it("parseXMLString() - passed.xml", function (done) {
+    it("parseXMLString() - passed.xml", done => {
 
-        let s = fs.readFileSync(path.join(__dirname, "resources", "passed.xml"));
+        const s = fs.readFileSync(path.join(__dirname, "resources", "passed.xml"));
 
         new Parser().parseXMLString(s)
             .then(r => {
@@ -100,7 +100,7 @@ describe("xml report parser", function () {
                 expect(r.testsuites[0].errors).equal(0);
                 expect(r.testsuites[0].skipped).equal(0);
                 expect(r.testsuites[0].tag).equal("GENERAL");
-                expect(r.testsuites[0].durationSec).equal(43.4);
+                expect(r.testsuites[0].durationSec).equal(43.404);
                 done();
             })
             .catch(e => {
@@ -108,7 +108,21 @@ describe("xml report parser", function () {
             });
     });
 
-    it("parseXMLFile() - passed2.xml", function (done) {
+    it("issue 2 - missing duration", done => {
+
+        const s = fs.readFileSync(path.join(__dirname, "resources", "issue2.xml"));
+
+        new Parser().parseXMLString(s)
+            .then(r => {
+                expect(r.testsuites[0].durationSec).equal(0.006);
+                done();
+            })
+            .catch(e => {
+                done(e);
+            });
+    });
+
+    it("parseXMLFile() - passed2.xml", done => {
 
         new Parser().parseXMLFile(path.join(__dirname, "resources", "passed2.xml"))
             .then(r => {
@@ -131,7 +145,7 @@ describe("xml report parser", function () {
                 expect(r.testsuites[0].errors).equal(0);
                 expect(r.testsuites[0].skipped).equal(0);
                 expect(r.testsuites[0].tag).equal("GENERAL");
-                expect(r.testsuites[0].durationSec).equal(43.4);
+                expect(r.testsuites[0].durationSec).equal(43.404);
                 done();
             })
             .catch(e => {
@@ -139,7 +153,7 @@ describe("xml report parser", function () {
             });
     });
 
-    it("parseXMLFile() - passed3.xml", function (done) {
+    it("parseXMLFile() - passed3.xml", done => {
 
         new Parser({customTag: "GENERAL1"}).parseXMLFile(path.join(__dirname, "resources", "passed3.xml"))
             .then(r => {
@@ -170,7 +184,7 @@ describe("xml report parser", function () {
             });
     });
 
-    it("parseXMLFile() - report.xml", function (done) {
+    it("parseXMLFile() - report.xml", done => {
 
         new Parser({customTag: "GENERAL1"}).parseXMLFile(path.join(__dirname, "resources", "report.xml"))
             .then(r => {
@@ -188,18 +202,18 @@ describe("xml report parser", function () {
                 expect(new Date(r.testsuites[0].timestamp).getTime()).equal(1512662456000);
                 expect(r.testsuites[0].properties.length).equal(1);
 
-                for (let x of r.testsuites) {
+                for (const x of r.testsuites) {
                     expect(x.properties[0].name).equal("browser.fullName");
                     expect(x.properties[0].value).equal("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
                 }
 
                 expect(r.testsuites[0].testCases.length).equal(2);
                 expect(r.testsuites[0].testCases[0].name).equal("can - not specified");
-                expect(r.testsuites[0].testCases[0].duration).equal(0.02);
+                expect(r.testsuites[0].testCases[0].duration).equal(0.017);
                 expect(r.testsuites[0].testCases[0].result).equal("succeeded");
                 expect(r.testsuites[0].testCases[0].message).equal("");
                 expect(r.testsuites[0].testCases[1].name).equal("can - no role specified");
-                expect(r.testsuites[0].testCases[1].duration).equal(0.02);
+                expect(r.testsuites[0].testCases[1].duration).equal(0.017);
                 expect(r.testsuites[0].testCases[1].result).equal("failed");
                 expect(r.testsuites[0].testCases[1].message).equal("");
 
@@ -208,11 +222,11 @@ describe("xml report parser", function () {
                 expect(r.testsuites[0].errors).equal(1);
                 expect(r.testsuites[0].skipped).equal(0);
                 expect(r.testsuites[0].tag).equal("GENERAL1");
-                expect(r.testsuites[0].durationSec).equal(0.04);
+                expect(r.testsuites[0].durationSec).equal(0.034);
 
                 expect(r.testsuites[1].testCases.length).equal(1);
                 expect(r.testsuites[1].testCases[0].name).equal("importFile 2");
-                expect(r.testsuites[1].testCases[0].duration).equal(0.01);
+                expect(r.testsuites[1].testCases[0].duration).equal(0.015);
                 expect(r.testsuites[1].testCases[0].result).equal("succeeded");
 
                 done();

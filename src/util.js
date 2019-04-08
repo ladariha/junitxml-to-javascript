@@ -5,7 +5,7 @@ function isNull(x) {
 }
 
 function toFloat(val) {
-    return parseFloat((isNull(val) ? 0 : parseFloat(val)).toFixed(2));
+    return parseFloat((isNull(val) ? 0 : parseFloat(val)).toFixed(3));
 }
 
 exports.isNull = isNull;
