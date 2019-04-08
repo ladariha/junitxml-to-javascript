@@ -1,4 +1,7 @@
 
+# 1.1.1 (2019-04-08)
+* increased total time precision - issue [#2](https://github.com/ladariha/junitxml-to-javascript/issues/2)
+
 # 1.1.0 (2019-01-10)
 * dependency `xml2json` replaced with `xml2js-parser` [#1](https://github.com/ladariha/junitxml-to-javascript/pull/1) (thanks to @grantila)
 
