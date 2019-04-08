@@ -113,3 +113,14 @@ By default parser uses UTF-8 encoding. One can change that:
         .parseXMLFile("/tmp/passed.xml", "utf16")
         .then(report => console.log(JSON.stringify(report, null, 2)))
         .catch(err => console.error(e.message))
+
+#### Use time attribute from test suite instead of making sum of test cases for duration
+By default parser uses `time` attribute of `testcase` element and sums all values to get total duration of test suite. However, sometimes it might be needed to use `time` attribute from `testsuite` element instead. One can change that by specifying `sumTestCasesDuration` to be false (default is true):
+
+    const Parser = require("junitxml-to-javascript");
+    new Parser({
+            sumTestCasesDuration: false
+         })
+        .parseXMLFile("/tmp/passed.xml", "utf16")
+        .then(report => console.log(JSON.stringify(report, null, 2)))
+        .catch(err => console.error(e.message))

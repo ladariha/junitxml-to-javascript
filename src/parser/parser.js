@@ -9,8 +9,9 @@ const Report = require("../model/Report");
  * @param customTag
  * @constructor
  */
-function Parser({modifier = null, customTag = "GENERAL"} = {}) {
+function Parser({modifier = null, customTag = "GENERAL", sumTestCasesDuration = true} = {}) {
     this.modifier = modifier;
+    this.sumTestCasesDuration = sumTestCasesDuration;
     this.customTag = customTag;
 }
 
@@ -18,7 +19,7 @@ Parser.prototype._createReportObject = function (reportJsonObj) {
     if (this.modifier) {
         reportJsonObj = this.modifier(reportJsonObj);
     }
-    return Report.create(reportJsonObj, this.customTag);
+    return Report.create(reportJsonObj, this.customTag, this.sumTestCasesDuration);
 };
 
 // Make xml2js-parser output like xml2json

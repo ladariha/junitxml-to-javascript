@@ -19,7 +19,7 @@ function parseTimestamp(dateTime) {
     }
 }
 
-function TestSuite(suiteName, timestamp, properties = [], customTag = "GENERAL") {
+function TestSuite(suiteName, timestamp, properties = [], customTag = "GENERAL", sumTestCasesDuration = true, suiteDuration = 0) {
     this.name = suiteName;
     // either 20171124T101817+0100 or 2017-11-24T08:43:08
     this.timestamp = timestamp ? parseTimestamp(timestamp) : Date.now();
@@ -31,7 +31,8 @@ function TestSuite(suiteName, timestamp, properties = [], customTag = "GENERAL")
     this.errors = 0;
     this.skipped = 0;
     this.tag = customTag;
-    this.durationSec = 0; // in secs
+    this.sumTestCasesDuration = sumTestCasesDuration;
+    this.durationSec = sumTestCasesDuration ? 0 : toFloat(suiteDuration); // in secs
 }
 
 TestSuite.prototype.addTestCase = function (caseObject) {
@@ -44,7 +45,9 @@ TestSuite.prototype.addTestCase = function (caseObject) {
         this.succeeded++;
     }
     this.tests++;
-    this.durationSec = toFloat(this.durationSec + x.duration);
+    if (this.sumTestCasesDuration) {
+        this.durationSec = toFloat(this.durationSec + x.duration);
+    }
     this.testCases.push(x);
 
 };

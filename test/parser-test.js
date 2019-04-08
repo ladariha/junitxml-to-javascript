@@ -1,6 +1,8 @@
 "use strict";
 
-const {expect} = require("chai");
+const {
+    expect
+} = require("chai");
 const Parser = require("../src/parser/parser");
 const fs = require("fs");
 const path = require("path");
@@ -108,6 +110,44 @@ describe("xml report parser", () => {
             });
     });
 
+    it("suite duration - default", done => {
+
+        const s = fs.readFileSync(path.join(__dirname, "resources", "suiteDuration.xml"));
+
+        new Parser().parseXMLString(s)
+            .then(r => {
+
+                expect(r.testsuites[0].durationSec).equal(0.006);
+                expect(r.testsuites[1].durationSec).equal(0.002);
+                expect(r.testsuites[2].durationSec).equal(0);
+                done();
+            })
+            .catch(e => {
+                done(e);
+            });
+    });
+
+
+    it("suite duration", done => {
+
+        const s = fs.readFileSync(path.join(__dirname, "resources", "suiteDuration.xml"));
+
+        new Parser({
+                sumTestCasesDuration: false
+            }).parseXMLString(s)
+            .then(r => {
+
+                expect(r.testsuites[0].durationSec).equal(25.127);
+                expect(r.testsuites[1].durationSec).equal(0.439);
+                expect(r.testsuites[2].durationSec).equal(0.366);
+                done();
+            })
+            .catch(e => {
+                done(e);
+            });
+    });
+
+
     it("issue 2 - missing duration", done => {
 
         const s = fs.readFileSync(path.join(__dirname, "resources", "issue2.xml"));
@@ -155,7 +195,9 @@ describe("xml report parser", () => {
 
     it("parseXMLFile() - passed3.xml", done => {
 
-        new Parser({customTag: "GENERAL1"}).parseXMLFile(path.join(__dirname, "resources", "passed3.xml"))
+        new Parser({
+                customTag: "GENERAL1"
+            }).parseXMLFile(path.join(__dirname, "resources", "passed3.xml"))
             .then(r => {
                 expect(r.testsuites.length).equal(1);
                 expect(r.testsuites[0].name).equal("1my.package.class.Something");
@@ -186,7 +228,9 @@ describe("xml report parser", () => {
 
     it("parseXMLFile() - report.xml", done => {
 
-        new Parser({customTag: "GENERAL1"}).parseXMLFile(path.join(__dirname, "resources", "report.xml"))
+        new Parser({
+                customTag: "GENERAL1"
+            }).parseXMLFile(path.join(__dirname, "resources", "report.xml"))
             .then(r => {
                 expect(r.testsuites.length).equal(9);
                 expect(r.testsuites[0].name).equal("Access");

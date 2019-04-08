@@ -12,7 +12,7 @@ const TestSuite = require("./TestSuite");
  * @param {String} customTag
  * @constructor
  */
-function Report(resultObject, customTag) {
+function Report(resultObject, customTag, sumTestCasesDuration) {
     // first fix some common issues
     let suites = resultObject.testsuites || (resultObject.testsuite || []);
 
@@ -39,7 +39,7 @@ function Report(resultObject, customTag) {
         }
 
         if (!existingSuites.has(x.name)) {
-            existingSuites.set(x.name, new TestSuite(x.name, x.timestamp, currentProperties, customTag));
+            existingSuites.set(x.name, new TestSuite(x.name, x.timestamp, currentProperties, customTag, sumTestCasesDuration, x.time));
         }
 
         let tc = x.testcase || [];
@@ -50,7 +50,7 @@ function Report(resultObject, customTag) {
         tc.forEach(y => {
             const suiteName = isNull(y.classname) ? x.name : y.classname;
             if (!existingSuites.has(suiteName)) {
-                existingSuites.set(suiteName, new TestSuite(suiteName, x.timestamp, currentProperties, customTag));
+                existingSuites.set(suiteName, new TestSuite(suiteName, x.timestamp, currentProperties, customTag, sumTestCasesDuration, x.time));
             }
 
             existingSuites.get(suiteName).addTestCase(y);
@@ -67,4 +67,4 @@ function Report(resultObject, customTag) {
  * @param customTag
  * @return {Report}
  */
-exports.create = (resultObj, customTag) => new Report(resultObj, customTag);
+exports.create = (resultObj, customTag, sumTestCasesDuration) => new Report(resultObj, customTag, sumTestCasesDuration);

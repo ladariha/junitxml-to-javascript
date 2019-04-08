@@ -1,4 +1,7 @@
 
+# 1.1.2 (2019-04-08)
+* optional parameter to get suite duration from `testsuite.time` attribute instead of counting test cases' `time` attribute - issue [#3](https://github.com/ladariha/junitxml-to-javascript/issues/3)
+
 # 1.1.1 (2019-04-08)
 * increased total time precision - issue [#2](https://github.com/ladariha/junitxml-to-javascript/issues/2)
 
