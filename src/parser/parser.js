@@ -55,7 +55,7 @@ function undollar(node) {
             if (key === 'error' && val.length > 0 && typeof val[0] === 'object' && val[0]['$']) {
                 ret[key] = {
                     message: val[0]['$']['message'],
-                    '$t': val[0]['_'].trim(),
+                    '$t': (val[0]['_'] || '').trim(),
                 };
             } else if (key === 'system-out' && val.length > 0) {
                 ret[key] = val[0].trim();
