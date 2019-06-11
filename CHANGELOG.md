@@ -1,3 +1,6 @@
+# 1.1.3 (2019-06-11)
+* `trim() of undefined` [pull request 4](https://github.com/ladariha/junitxml-to-javascript/pull/4) (thanks to @finelord)
+
 
 # 1.1.2 (2019-04-08)
 * optional parameter to get suite duration from `testsuite.time` attribute instead of counting test cases' `time` attribute - issue [#3](https://github.com/ladariha/junitxml-to-javascript/issues/3)
