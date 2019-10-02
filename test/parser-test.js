@@ -80,6 +80,40 @@ describe("xml report parser", () => {
             });
     });
 
+    it("parseXMLString() - failed3.xml", done => {
+
+        const s = fs.readFileSync(path.join(__dirname, "resources", "failed3.xml"));
+
+        new Parser({modifier: (xmlObject) => {
+          expect(xmlObject.testsuites.testsuite[1].testcase[0].failure).equal('single failure');
+          expect(xmlObject.testsuites.testsuite[1].testcase[1].failure[0]).equal('1st failure');
+          expect(xmlObject.testsuites.testsuite[1].testcase[1].failure[1]).equal('2nd failure');
+          return xmlObject;
+        }}).parseXMLString(s)
+            .then(r => {
+                expect(r.testsuites.length).equal(3);
+
+                expect(r.testsuites[0].succeeded).equal(1);
+                expect(r.testsuites[0].tests).equal(1);
+                expect(r.testsuites[0].errors).equal(0);
+                expect(r.testsuites[0].skipped).equal(0);
+
+                expect(r.testsuites[1].succeeded).equal(0);
+                expect(r.testsuites[1].tests).equal(1);
+                expect(r.testsuites[1].errors).equal(1);
+                expect(r.testsuites[1].skipped).equal(0);
+
+                expect(r.testsuites[1].succeeded).equal(0);
+                expect(r.testsuites[1].tests).equal(1);
+                expect(r.testsuites[1].errors).equal(1);
+                expect(r.testsuites[1].skipped).equal(0);
+                done();
+            })
+            .catch(e => {
+                done(e);
+            });
+    });
+
     it("parseXMLString() - passed.xml", done => {
 
         const s = fs.readFileSync(path.join(__dirname, "resources", "passed.xml"));
@@ -243,7 +277,7 @@ describe("xml report parser", () => {
                 expect(r.testsuites[7].name).equal("args");
                 expect(r.testsuites[8].name).equal("args2");
 
-                expect(new Date(r.testsuites[0].timestamp).getTime()).equal(1512662456000);
+                expect(new Date(r.testsuites[0].timestamp).getTime()).equal(1512694856000);
                 expect(r.testsuites[0].properties.length).equal(1);
 
                 for (const x of r.testsuites) {

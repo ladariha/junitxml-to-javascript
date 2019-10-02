@@ -29,6 +29,8 @@ function undollar(node) {
     if (Array.isArray(node)) {
         if (node.length === 1 && Object.keys(node[0]).length === 0) {
             return node[0];
+        } else if (node.length == 1 && typeof node[0] === 'string') {
+            return node[0];
         } else if (node.length > 1) {
             return node.map(element => undollar(element));
         } else {
@@ -41,6 +43,10 @@ function undollar(node) {
                     .reduce((prev, cur) => prev + cur)
                     .trim();
         }
+    }
+
+    if (typeof node === 'string') {
+      return node;
     }
 
     Object.keys(node).forEach(key => {

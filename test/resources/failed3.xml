@@ -1,0 +1,15 @@
+<testsuites name="jest tests">
+  <testsuite name="addition.test.js" tests="1" errors="0" failures="0" skipped="0" timestamp="2017-07-13T09:42:28" time="0.161">
+    <testcase classname="addition positive numbers should add up" name="addition positive numbers should add up" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="addition.failure.js" tests="1" errors="0" failures="2" skipped="0" timestamp="2017-07-13T09:42:28" time="0.161">
+    <testcase classname="single failure" name="addition positive numbers should add up" time="0.004">
+      <failure>single failure</failure>
+    </testcase>
+    <testcase classname="multiple failures" name="addition positive numbers should add up" time="0.004">
+      <failure>1st failure</failure>
+      <failure>2nd failure</failure>
+    </testcase>
+  </testsuite>
+</testsuites>
