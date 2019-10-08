@@ -1,3 +1,6 @@
+# 1.1.4 (2019-10-08)
+* Fix parsing nested strings [pull request 5](https://github.com/ladariha/junitxml-to-javascript/pull/5) (thanks to @Azuka)
+
 # 1.1.3 (2019-06-11)
 * `trim() of undefined` [pull request 4](https://github.com/ladariha/junitxml-to-javascript/pull/4) (thanks to @finelord)
 
