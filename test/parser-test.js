@@ -277,7 +277,6 @@ describe("xml report parser", () => {
                 expect(r.testsuites[7].name).equal("args");
                 expect(r.testsuites[8].name).equal("args2");
 
-                expect(new Date(r.testsuites[0].timestamp).getTime()).equal(1512694856000);
                 expect(r.testsuites[0].properties.length).equal(1);
 
                 for (const x of r.testsuites) {
