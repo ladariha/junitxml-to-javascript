@@ -17,13 +17,13 @@ function TestCase(caseObject) {
     FAILURE_KEYS.forEach(x => {
         if (!isNull(caseObject[x])) {
             self.result = FAILED_RESULT;
-            self.message = isNull(caseObject[x].message) ? "" : caseObject[x].message;
+            self.message = caseObject[x].$t || caseObject[x].message || '';
         }
     });
     SKIP_KEYS.forEach(x => {
         if (!isNull(caseObject[x])) {
             self.result = SKIPPED_RESULT;
-            self.message = isNull(caseObject[x].message) ? "" : caseObject[x].message;
+            self.message = caseObject[x].$t || caseObject[x].message || '';
         }
     });
 }
