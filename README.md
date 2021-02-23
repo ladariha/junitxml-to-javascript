@@ -11,7 +11,7 @@ Pluggable jUnit XML reports parser to JavaScript objects
     new Parser({customTag: "GENERAL1"})
         .parseXMLFile("/tmp/passed.xml")
         .then(report => console.log(JSON.stringify(report, null, 2)))
-        .catch(err => console.error(e.message))
+        .catch(e => console.error(e.message))
         
 ### Parsing XML report string
 
