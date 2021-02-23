@@ -80,7 +80,7 @@ data are transformed to raw JavaScript object using library `xml2js-parser`
      const Parser = require("junitxml-to-javascript");
      const p = new Parser({modifier : (xmlObject) => {
          const x = {};
-         x.testsuites = xmlObject;
+         x.testsuites = xmlObject.testsuites;
          return x;
      });
 ```
